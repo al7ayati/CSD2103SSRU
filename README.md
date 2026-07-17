@@ -1,18 +1,73 @@
-## Getting Started
+readme_content = """# CSD2103 (002) งานโปรแกรมครั้งที่ 1 #
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+โปรเจกต์นี้เป็นส่วนหนึ่งของใบงานทบทวนความรู้ภาษา Java โดยประกอบด้วยโปรแกรมพื้นฐานที่ครอบคลุมโครงสร้างควบคุม (Control Structures) การใช้งานระบบเงื่อนไข การทำงานวนซ้ำ และการจัดการข้อมูลด้วยอาร์เรย์ (Array) เพื่อเตรียมความพร้อมสำหรับกระบวนการคิดเชิงอัลกอริทึม
 
-## Folder Structure
+---
 
-The workspace contains two folders by default, where:
+## 📂 โครงสร้างและไฟล์ในโปรเจกต์ (Project Structure)
+* **`App.java`**: ไฟล์เริ่มต้นระบบหลักจาก Text Editor / IDE
+* **`EvenOddChecker.java`**: โปรแกรมสำหรับตรวจสอบประเภทเลขคู่และเลขคี่
+* **`GradeChecker.java`**: โปรแกรมคำนวณผลรวมคะแนนและตัดสินผลการเรียน (ผ่าน/ไม่ผ่าน)
+* **`ArraySearch.java`**: โปรแกรมค้นหาข้อมูลรายชื่อนักศึกษาภายในระบบอาร์เรย์ 1 มิติ
+* **`MiniProject.java`**: โปรแกรมแก้โจทย์ Mini Challenge สำหรับค้นหาค่าต่ำสุดและสูงสุดจากข้อมูล 10 จำนวน
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+---
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## 💻 รายละเอียดโปรแกรมภายในโปรเจกต์
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+### 1. โปรแกรมตรวจสอบเลขคู่/เลขคี่ (`EvenOddChecker.java`)
+* **ชื่อโปรแกรม**: EvenOddChecker
+* **Input**: ตัวเลขจำนวนเต็ม (Integer) จำนวน 1 ค่า รับค่าผ่านทางแป้นพิมพ์ด้วยวัตถุ `Scanner`
+* **Process**: นำตัวเลขที่รับมาเข้าสู่กระบวนการหารเอาเศษ (Modulo) ด้วย 2 (`number % 2`) เพื่อตรวจสอบว่าเศษที่ได้เท่ากับ 0 หรือไม่
+* **Output**: 
+  * แสดงคำว่า `Even number` หากหารลงตัว (เศษเป็น 0)
+  * แสดงคำว่า `Odd number` หากหารไม่ลงตัว
 
-## Dependency Management
+### 2. โปรแกรมคำนวณคะแนนรวมและตัดสินผลผ่าน/ไม่ผ่าน (`GradeChecker.java`)
+* **ชื่อโปรแกรม**: GradeChecker
+* **Input**: 
+  1. คะแนนกลางภาค (Midterm Score) เป็นจำนวนเต็ม
+  2. คะแนนปลายภาค (Final Score) เป็นจำนวนเต็ม
+* **Process**: 
+  1. นำคะแนนทั้งสองส่วนมารวมกันเพื่อหาคะแนนสุทธิ (`totalScore = midtermScore + finalScore`)
+  2. ตรวจสอบเงื่อนไขคะแนนสุทธิโดยใช้คำสั่ง `if-else` ว่าคะแนนมากกว่าหรือเท่ากับ 50 หรือไม่ (`totalScore >= 50`)
+* **Output**: 
+  * แสดงผลรวมคะแนนในรูปแบบ `Total score = [คะแนนรวม]`
+  * แสดงคำว่า `Pass` หากคะแนนรวมตั้งแต่ 50 คะแนนขึ้นไป
+  * แสดงคำว่า `Fail` หากคะแนนรวมน้อยกว่า 50 คะแนน
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+### 3. โปรแกรมค้นหาข้อมูลเกี่ยวกับ Array (`ArraySearch.java`)
+* **ชื่อโปรแกรม**: ArraySearch
+* **Input**: ข้อความชื่อนักศึกษาที่ต้องการค้นหา (String) ผ่านทางแป้นพิมพ์
+* **Process**: 
+  1. ระบบกำหนดค่าเริ่มต้นของรายชื่อนักศึกษา 5 คนไว้ในอาร์เรย์ประเภท String แบบ 1 มิติ
+  2. ใช้คำสั่งวนซ้ำ `for loop` ไล่ตรวจสอบสมาชิกใน Array ทีละช่อง
+  3. เปรียบเทียบข้อความที่ผู้ใช้กรอกกับข้อความใน Array ด้วยเมธอด `.equals()`
+  4. หากสอดคล้องตรงกัน ให้เปลี่ยนสถานะตัวแปรแฟล็ก (Flag) เป็นพบข้อมูลแล้วสั่ง `break` เพื่อออกจากลูป
+* **Output**:
+  * แสดงข้อความ `Found` หากพบรายชื่อนั้นในอาร์เรย์
+  * แสดงข้อความ `Not Found` หากไม่พบรายชื่อในอาร์เรย์
+
+### 4. Mini Challenge 1: โปรแกรมหาค่าต่ำสุดและค่าสูงสุด (`MiniProject.java`)
+* **ชื่อโปรแกรม**: MiniProject
+* **Input**: ตัวเลขจำนวนเต็ม (Integer) จำนวน 10 ตัว กรองเก็บลงในอาร์เรย์ขนาด 10 ช่องผ่านช่องทางรับข้อมูล
+* **Process**: 
+  1. ประกาศตัวแปรอาร์เรย์ขนาด 10 ช่องเพื่อจัดเก็บค่ารับเข้าทั้งหมด
+  2. กำหนดให้สมาชิกตัวแรกของอาร์เรย์ (`numbers[0]`) เป็นค่าเริ่มต้นของทั้งค่าต่ำสุด (`min`) และค่าสูงสุด (`max`)
+  3. ใช้ `for loop` เริ่มวนลูปตั้งแต่ดัชนีที่ 1 ถึง 9 เพื่อเปรียบเทียบค่าสมาชิกแต่ละตัวในอาเรย์
+  4. หากสมาชิกตำแหน่งใดมีค่าน้อยกว่า `min` ให้ปรับเปลี่ยนค่า `min` เป็นค่านั้น
+  5. หากสมาชิกตำแหน่งใดมีค่ามากกว่า `max` ให้ปรับเปลี่ยนค่า `max` เป็นค่านั้น
+* **Output**: 
+  * แสดงผลลัพธ์ในบรรทัดแรกเป็น `Minimum number = [ค่าที่น้อยที่สุด]`
+  * แสดงผลลัพธ์ในบรรทัดถัดมาเป็น `Maximum number = [ค่าที่มากที่สุด]`
+
+---
+
+## 🚀 วิธีรันโปรแกรม (How to Run)
+
+คุณสามารถเปิดโปรเจกต์นี้บน IDE ยอดนิยมทั่วไป (เช่น VS Code, IntelliJ IDEA) หรือรันผ่าน Command Line / Terminal ตามขั้นตอนดังนี้:
+
+1. เปิด Terminal หรือ Command Prompt ไปยังตำแหน่งโฟลเดอร์ที่เก็บไฟล์ `.java`
+2. คอมไพล์ไฟล์ซอร์สโค้ดที่ต้องการรันด้วยคำสั่ง `javac` ตัวอย่างเช่น:
+   ```bash
+   javac MiniProject.java
